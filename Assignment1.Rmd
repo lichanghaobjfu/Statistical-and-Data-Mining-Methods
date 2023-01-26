@@ -85,7 +85,7 @@ To explore the data we will begin by examining the summary statistics and distri
 
 As part of our exploratory data analysis we will use these predictors to examine the correlation between the dependent variable (MEDHVAL). A correlation shows the relationship between variables. Thus the correlation coefficient shows the measure of correlation. We utilized the Pearson Correlation Coefficient Formula which ranges between +1 and -1. The further away the correlation coefficient is from zero, the stronger the relationship between the two variables. When the coefficient comes down to zero, then the data is considered as not related. If the value is positive there's a positive correlation, and if the value is negative, there's a negative correlation. The Pearson Correlation Coefficient Formula is as follows:
 
-![Alt text](Pic1/Formula1.png)![Alt text](Pic1/Formula2.png)
+![](Pic1/Formula1.png)![](Pic1/Formula2.png)
 
 For each (X, Y) pair in our dataset, we need to find the difference between the x value and the mean x value, the difference between the y value and the mean y value, then multiply these two numbers together.  "Σ" is the Greek symbol for Sigma, and it is used in stats to signify that everything should be added up.
 
@@ -124,46 +124,46 @@ If one or more of these assumptions are violated, then the results of our linear
 
 There are several parameters that need to be estimated in the regression including σ2 and 𝛽0 through 𝛽k. The parameter σ2 determines the amount of variability inherent in the regression model. When the predictor is 1, only regression lines need to be dealt with.  If σ2 is small, then the pairs (xi, yi) are going to fall very close to the true line.  If σ2 is large, then the pairs (xi, yi) are going to be quite spread out about the true regression line. The fitted (or predicted) values ŷ1, ŷ2 ,…, ŷn are obtained by substituting x1,…,xn into the equation of the estimated regression line, so: 
 
-![Alt text](Pic1/Formula3.png)
+![](Pic1/Formula3.png)
 
 Meaning that ŷ1MEDHVAL = 𝛽0+ 𝛽1𝑃𝐶𝑇𝑉𝐴𝐶𝐴𝑁𝑇,  ŷ2MEDHVAL = 𝛽0+ 𝛽2𝑃𝐶𝑇𝑆𝐼𝑁𝐺𝐿𝐸𝑆, etc
 
 As mentioned above the residuals are vertical deviations from the estimated line
 
-![Alt text](Pic1/Formula4.png)
+![](Pic1/Formula4.png)
 
 σ2 is the variance of residuals 𝜀. The estimator of σ2 is 𝑠2, and can be calculated in the equation below:
 
-![Alt text](Pic1/Formula5.png)
+![](Pic1/Formula5.png)
 
 Here, 𝑘 is the number of predictors and n is the number of observations. Additionally, Least squares estimates for  ̂β0,…,  ̂βk are obtained when the quantity above for the Error Sum of Squares (SSE) is minimized. Which can be calculated in the equation below: 
 
-![Alt text](Pic1/Formula6.png)
+![](Pic1/Formula6.png)
 
 Given n observations on y, and k predictors x1 … xk, the estimates ̂β0, ̂β1, ̂β2,…,  ̂βk are chosen simultaneously to minimize the expression for the Error Sum of Squares (SSE), given by:
-![Alt text](Pic1/Formula7.png)
+![](Pic1/Formula7.png)
 
 Coefficient of multiple determination, 𝑅2, is the proportion of observed variation in the dependent variable 𝑦 that was explained by the model. 𝑅2 can be calculated by:
 
-![Alt text](Pic1/Formula8.png)
-![Alt text](Pic1/Formula9.png)
-![Alt text](Pic1/Formula10.png)
-![Alt text](Pic1/Formula11.png)
+![](Pic1/Formula8.png)
+![](Pic1/Formula9.png)
+![](Pic1/Formula10.png)
+![](Pic1/Formula11.png)
 
-Also, as in simple regression,![Alt text](Pic1/Formula12.png)
+Also, as in simple regression,![](Pic1/Formula12.png)
 
 Here, R2 is the coefficient of multiple determination, or the proportion of variance in the model explained by all k predictors.
 
-Because extra predictors will generally increase R2, it is typically adjusted for the number of predictors:![Alt text](Pic1/Formula13.png)
+Because extra predictors will generally increase R2, it is typically adjusted for the number of predictors:![](Pic1/Formula13.png)
 
 Before doing a hypothesis test for each individual predictor we do a so-called model utility test, referred to as the F-ratio, or the F-test. The F-ratio is used to test the null hypothesis (H0) that all of the regression coefficients (βi’s) are equal to zero against the alternative hypothesis (Ha) that at least one of the regression coefficients is not equal to zero. For each of the βi's, we are testing the null hypothesis (H0) that the coefficient is equal to zero against the alternative hypothesis (Ha) that the coefficient is not equal to zero.
 
 The F-test is completed using the following formulas:
 
-![Alt text](Pic1/Formula14.png)
+![](Pic1/Formula14.png)
 
 On the other hand, the T-test, examines the p-value associated with each independent variable 𝑥i.
-![Alt text](Pic1/Formula15.png)
+![](Pic1/Formula15.png)
 
 If the p-value for βi= 0 is less than 0.05, the null hypothesis is rejected, determining that 𝑥( is a significant predictor of 𝑦. When the null hypothesis cannot be rejected, the dependent variable is not related to the independent variable
 
@@ -200,7 +200,7 @@ sd(regData$PCTVACANT)
 sd(regData$PCTSINGLES)
 ```
 
-![Alt text](Pic1/T1.png)
+![](Pic1/T1.png)
 
 ### Histogram Distribution and Logarithmic Transformation
 
@@ -287,7 +287,6 @@ matrix
 ##### *Figure 4 - Correlation Matrix*
 
 ```{r}
-
 ggcorrplot(cor(regressionVarsCor),outline.col = "white",lab =T)
 ```
 
@@ -354,7 +353,7 @@ hist(predLM$predRStand,breaks = 80)
 
 Assumption 3, homoscedastic of variance of the residuals, is violated. By using standardized residuals, the residuals of the different observations can be compared to each observation. Standard Residuals are the raw residuals divided by the standard error of estimate. It can be calculated through the following formula.
 
-![Alt text](Pic1/Formula17.png)
+![](Pic1/Formula17.png)
 
 Figure 9 shows the relationship between standardized residual (on y-axis) and the predicted value (on x-axis). The variance of residuals seems not constant for different values of predictors (or y-hat). Clearly, this is heteroscedasticity, and a non-linear model would better describe the relationship among the variables.  The plots show that the residuals are positive for low interval, positive for high interval. And there are some outliers in the graph especially in the low and high intervals in predicted house value. Many outliers are 4-6 standard deviations away from 0, which are distributed across the range of small and large x values. In the middle interval of the predicted house value, the standardized residuals are concentrated around zero with few outliers.
 
@@ -386,7 +385,7 @@ Assumption 4, independence of observations, is violated.
 
 Referring to Figures 2 and 3, we can draw inferences regarding the independence of the observations. Similar data tend to cluster in space, and it is simple to see spatial autocorrelation from those maps. A factor with a strong geographic relationship is median house value, for which spatial autocorrelation is inevitable. As a result, the independent observation assumption is invalid. Additionally, because they are not taken into account in multiple regression, this spatial autocorrelation may be able to explain why standardized residuals are heteroscedastic
 #### *Figure 10 - Maps of Standardized Residuals of Regression Model*
-![Alt text](Pic1/F13.png)
+![](Pic1/F13.png)
 
 Figure 10 above is the choropleth map of standardized regression residuals. The standardized residuals' spatial patterns can be seen. Further specific operations are required to take into account this geographical clustering since the median house values in the city center are underestimated while they are overestimated towards the north and west of Philadelphia.
 
@@ -412,7 +411,7 @@ The F-ratio test indicates that the model is significant, yet R2 is only 0.6615,
 
 The stepwise regression model included all 4 predictors, indicating that sufficient predictors were not excluded. This suggests that all 4 predictors are likely to be significant. The 𝑅𝑀𝑆𝐸4-predcitor of 0.367 is higher than the 𝑅𝑀𝑆𝐸2-predictor of 0.443, demonstrating the combined effect of the percentage of singles, the percentage of bachelor, the percentage of vacant and number of poverty variables on the overall quality of the model.
 
-![Alt text](Pic1/F15.png)
+![](Pic1/F15.png)
 
 The model has several limitations. Firstly, the assumption of OLS that there is a linear relationship between the dependent variable and the predictors is not fulfilled, leading to a decrease in the model's significance and accuracy. Secondly, the homoscedasticity of the residuals’ variance is not met, resulting in systematic under or over-prediction. To address this issue, adding predictors or using spatial regression could be helpful. Thirdly, the independence of observations is broken since there are distinct clustering patterns in predictors, dependent variable, and residuals; thus, running a spatial regression like SE, SL, or GWR instead of OLS regression would be more effective.
 

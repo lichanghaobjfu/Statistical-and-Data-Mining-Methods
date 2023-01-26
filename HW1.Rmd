@@ -9,28 +9,35 @@ author:
 date: "2022-10-18"
 output: 
   html_document:
+    toc: true
+    toc_float: true
     code_folding: hide
 ---
 
+```{css, echo=FALSE}
+pre {
+  max-height: 300px;
+  overflow-y: auto;
+}
 
+pre[class] {
+  max-height: 300px;
+}
+```
 
 ```{r setup, include=FALSE,echo=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+opts_chunk$set(collapse = TRUE, prompt = TRUE, echo = TRUE)
 library(tidyverse)
 library(DAAG)
 library(MASS)
 library(ggpmisc)
-library(stargazer) # Source: ^[Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables. R package version 5.2.2. https://CRAN.R-project.org/package=stargazer]
-library(knitr)
-opts_chunk$set(collapse = TRUE, prompt = TRUE)
+library(stargazer) 
+rm(list=ls()) 
 
-rm(list=ls()) ##Clear my objects from memory
-
-#Avoid getting results in scientific notation!
 options(scipen = 999)
+
 ```
-
-
 
 ```{r, loadData}
 regData <- read.csv("E:/course/2022/Musa500/Homework_Assignments_export/HW 1/RegressionData.csv")
@@ -55,8 +62,6 @@ hist(regData$PCTVACANT)
 hist(regData$PCTSINGLES)
 
 ```
-figure1
-
 
 ```{r, fig.width=12, fig.height=8}
 par(mfrow=c(3,2))
@@ -70,8 +75,6 @@ tregData <-
 				 LNMEDHHINC = log(MEDHHINC)
 				 )
 ```
-
-
 
 ```{r, fig.width=12, fig.height=18}
 
@@ -113,13 +116,13 @@ matrix <- cor(regressionVars)
 matrix
 
 ```
+
 ```{r}
 library(ggcorrplot)
 ggcorrplot(cor(regressionVars),outline.col = "white",lab =T)
 ```
 
-
-```{r, regression}
+```{r, results='hide', fig.show='hide'}
 predLM <- lm(LNMEDHVAL ~ PCTBACHMOR+PCTVACANT+PCTSINGLES+LNNBELPOV100, data = regressionVars)
 summary(predLM)
 
@@ -141,6 +144,7 @@ g_reg = ggplot(reg_result, aes(x = predFit, y = predR_stand)) +
                                  after_stat(rr.label), sep = "*\", \"*"))) 
 g_reg
 ```
+
 ```{r standard residuals}
 hist(predLM$predRStand,breaks = 80)
 ```
@@ -161,9 +165,7 @@ step <- stepAIC(predLM, direction="both")
 step$anova
 ```
 
-
-
-```{r, kfold1}
+```{r, results='hide', fig.show='hide'}
 kFold1 <- CVlm(data = dtregdata, predLM, 5)
 
 # Extract Mean Standard Errors & RMSE:
@@ -171,11 +173,10 @@ mse <- attr(kFold1, "ms")
 rmse <- sqrt(mse)
 ```
 
-```{r, regression2}
+```{r, results='hide', fig.show='hide'}
 regVars2 <- 
 	dtregdata %>%
 	dplyr::select(LNMEDHVAL, PCTVACANT, MEDHHINC)
-
 
 predLM2 <- lm(LNMEDHVAL ~ PCTVACANT+MEDHHINC, data = regVars2)
 summary(predLM2)
@@ -183,7 +184,6 @@ summary(predLM2)
 regVars2$predFit2 <- fitted(predLM2)
 regVars2$predResids2 <- residuals(predLM2)
 regVars2$predRStand2 <- rstandard(predLM2)
-
 
 # Attempt to link residuals to main dataset
 residsDF <- 
@@ -194,7 +194,7 @@ residsDF <-
 plot(regVars2$predFit2, regVars2$predRStand2)
 ```
 
-```{r, kfold2}
+```{r, results='hide', fig.show='hide'}
 kFold2 <- CVlm(data = regVars2, predLM2, 5)
 
 # Extract Mean Standard Errors & RMSE:
@@ -202,9 +202,7 @@ mse2 <- attr(kFold2, "ms")
 rmse2 <- sqrt(mse2)
 ```
 
-
 ```{r}
-
 regResids <- regData %>%
   mutate(residuals = residuals(predLM), 
          residuals2 = residuals(predLM2)) %>%
@@ -213,6 +211,3 @@ regResids <- regData %>%
   
 regResids = regResids[c("POLY_ID", "residuals", "residuals2")]
 ```
-
-
-
