@@ -1,0 +1,83 @@
+---
+title: "Using OLS Regression to Predict Median House Values in Philadelphia"
+subtitle: "Statistical and Data Mining Methods - MUSA 500"
+author:
+  - name: "Changhao Li"
+    affiliation: "Student"
+  - name: "Eugene Brusilovskiy"
+    affiliation: "Professor"
+date: "2022-10-18"
+output: 
+  html_document:
+    code_folding: hide
+---
+
+```{css, echo=FALSE}
+pre {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+pre[class] {
+  max-height: 300px;
+}
+```
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(collapse = TRUE, prompt = TRUE, echo = TRUE)
+
+```
+
+## Introduction
+
+This investigation compares the median house value (MHV) of Philadelphia census tracts with several characteristics, including the percentage of individuals with bachelor’s degrees or higher, percentage of vacant houses, percentage of single house units, households living in poverty, and median household income. This relationship is explored by creating a predictive model using ordinary least squares (OLS) regression. By transforming variables, determining the correlations to detect multicollinearity and completing a k-fold cross validation to increase the accuracy of the model.
+
+The predictor variables are all closely related to MHV. Household income and poverty levels can greatly affect projections of MHV since financial situation of household determines what house they can afford. Education level is also a valuable predictor of a positive correlation with income. The vacancy rate in the surrounding area can also affect MHV since the vacancy rate indicates the supply and demand of local housing. The relevant predictive model can be constructed by the above predictive factors.
+
+## Methods 
+
+### **Data Cleaning** 
+
+Before we can predict Median House Values we have to clean the dataset. The original Philadelphia block group dataset has 1816 Observations. To clean the data we had to remove anomalies so that we can have a model that predicts more accurately. The following data was removed in order to clean our data:
+
+- Block groups where population’s are less than 40. 
+- Block groups where there are no housing units. 
+- Block groups where the median house value is lower than $10,000. 
+- One block group in North Philadelphia which had a very high median house value (over $800,000) and a very low median household income (less than $8,000).
+
+After these were removed, 1720 observations remained. This made up our final dataset which we would then use to plug in our regression model. 
+
+### **Exploratory Data Analysis**
+
+To explore the data we will begin by examining the summary statistics and distributions of our variables. For our analysis our dependent variable is the Median Household Value (MEDHVAL) and our independent variables (which is also known as predictors) are:
+- \# Households Living in Poverty (NBELPOV100)
+- % of Individuals with Bachelor’s Degrees or Higher (PCBACHMORE)
+- % of Vacant Houses (PCTVACANT)
+- % of Single House Units (PCTSINGLES)
+
+As part of our exploratory data analysis we will use these predictors to examine the correlation between the dependent variable (MEDHVAL). A correlation shows the relationship between variables. Thus the correlation coefficient shows the measure of correlation. We utilized the Pearson Correlation Coefficient Formula which ranges between +1 and -1. The further away the correlation coefficient is from zero, the stronger the relationship between the two variables. When the coefficient comes down to zero, then the data is considered as not related. If the value is positive there's a positive correlation, and if the value is negative, there's a negative correlation. The Pearson Correlation Coefficient Formula is as follows:
+
+
+
+
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
