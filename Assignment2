@@ -12,7 +12,7 @@ Spatial autocorrelation is a statistical method used to measure the degree of si
 
 Moran's I is a statistic used to measure spatial autocorrelation, which is the tendency of neighboring observations to have similar values. It is a measure of correlation between the attributes of different geographic locations. The formula for Moran's I is as follows:
 
-![Alt text](Formula%20for%20Moran's%20I.png)
+![Alt text](Pic2/Formula%20for%20Moran's%20I.png)
 
 Where<br>
 - X̅ is the mean of the variable X<br>
