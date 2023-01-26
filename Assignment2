@@ -98,7 +98,7 @@ Geographically Weighted Regression (GWR) is an extension of local regression tha
 
 The GWR equations are a set of equations used to estimate the relationships between a set of explanatory variables and a given response variable. The Geographically Weighted Regression (GWR) equations are a type of regression analysis used to analyze spatial data. The equation for the GWR model is written for each observation i=1…n:
   
-![Alt text](equation%20for%20the%20GWR%20model.png)
+![Alt text](Pic2/equation%20for%20the%20GWR%20model.png)
 
 Where:<br> 
 - Yi = is the dependent variable 
@@ -120,15 +120,15 @@ P-values are not part of the Geographical Weighted Regression output because the
 ### **Spatial Autocorrelation**
 In Figure 1, we see a scatterplot of the LNMEDHVAL in relation to the average value of its Queen neighbors. The global Moran's I value of 0.794 suggests that there may be positive spatial autocorrelation of the LNMEDHVAL. Figure 1 also have the permutation result of the global Moran's I, with a p-value of 0.001. We can also see that the Moran's I values (green lines on the right of the hist) in our dataset are much higher than the values in the randomly arranged Moran's I histogram. Based on that, we can reject the null hypothesis and argue that there is significant spatial-autocorrelation.
 #### *Figure 1. Moran’s I and Permutation Scatterplot of LNMEDHVAL*
-![Alt text](1.1.png)![Alt text](1.2.png)
+![Alt text](Pic2/1.1.png)![Alt text](Pic2/1.2.png)
 
 By running Local Moran’s I, We generated Cluster and Significance map. Figure 2 reveals clusters of high-high spatial autocorrelations in LNMEDHVAL (neighborhoods with high LNMEDHVAL surrounded by neighborhoods with also high LNMEDHVAL) in the Northeast Suburbs, Northwest Suburbs, Central City District, Southern University City, and a small block in the south of the city.  Low-low LNMEDHVAL relations (neighborhoods with low LNMEDHVAL surrounded by neighbors with also low LNMEDHVAL) are clustered in the areas north and southeast of the Central City, north and south of the University City, with a small isolated cluster in the northeast.  There are fewer clusters of high-low and low-high blocks, which can be observed in the Southeast Downtown and the area adjacent to the Northeast suburbs.
 #### *Figure 2. LISA Cluster Map*
-![Alt text](2.1.png)![Alt text](2.2.png)
+![Alt text](Pic2/2.1.png)![Alt text](Pic2/2.2.png)
 
 Figure 3 presents the significance value of the LISA. Most of the block groups identified as "correlated" in Figure 2 have a p-value less than 0.05, indicating that we can reject the null hypothesis in favor of the alternative hypothesis that the local Moran's I is significant (less than 5% chance of being non-significant). This means that there is significant spatial autocorrelation in these block groups.
 #### *Figure 3. LISA Significance Map*
-![Alt text](3.1.png)![Alt text](3.2.png)
+![Alt text](Pic2/3.1.png)![Alt text](Pic2/3.2.png)
 
 ### **A Review of OLS Regression and Assumptions**
 
@@ -137,7 +137,7 @@ Our regression models LNMEDHVAL regressed on PCTVACANT, PCTSINGLES, PCTBACHMOR a
 𝐿𝑁𝑀𝐸𝐷𝐻𝑉𝐴𝐿 = 𝛽0+ 𝛽1𝑃𝐶𝑇𝑉𝐴𝐶𝐴𝑁𝑇 + 𝛽2𝑃𝐶𝑇𝑆𝐼𝑁𝐺𝐿𝐸𝑆 + 𝛽3𝑃𝐶𝑇𝐵𝐴𝐶𝐻𝑀𝑂𝑅 + 𝛽4𝐿𝑁𝐵𝐸𝐿𝑂𝑊𝑃𝑂𝑉100 + 𝜀
 
 #### *Table 1. OLS output from GeoDa*
-![Alt text](T1.png)
+![Alt text](Pic2/T1.png)
 
 Table 1 above shows the regression output indicates that all predictor variables (PCTVACANT, PCTSINGLES, PCTBACHMOR, AND LNNBELPOV100) are highly significant. The negative coefficients of PCTVACANT and LNNBELPOV100 show they are negatively associated with LNMEDHVAL. PCTSINGLES and PCTBACHMOR are positively associated, given their positive coefficients (p<0.0001 for every variable). The residual standard error is 0.3665, and R Square equals 66.23%, which is the coefficient of multiple determination, as well as the proportion of variance in the model explained by all 4 predictors. In addition, the adjusted R Square equals 66.15%, which can be explained by predictors adjusted for the number of 4 predictors. We observed that all p-values associated with an F-ratio of 840.9 are less than 0.0001. In this case, we can reject the null hypothesis and conclude that the model is a good fit for the data. And It means that there is a statistically significant relationship between the predictor variables and the response variable.
 
@@ -145,11 +145,11 @@ The p-value for Breusch-Pagan test, Koenker-Bassett test, and White test are all
 
 Figure 4 below is the scatterplot of the weighted residuals (WT_RESIDU) and residual values (OLS_RESIDU) calculated in the OLS model by GeoDa. The results show that there is a positive linear correlation between those two. This is indicated by the p-value of the slope b being less than 0.01, which means that the relationship is statistically significant. Meanwhile, the slope b value - which population correlation coefficient of ρ has the value of 0.733, which is not equal to 0, thus we can reject the null hypothesis and favor the alternative that the correlation coefficient is spatially autocorrelated.
 #### *Figure 4. Scatterplot of OLS_RESIDU and WT_RESIDU*
-![Alt text](4.png)
+![Alt text](Pic2/4.png)
 
 Figure 5 below shows the Moran’s I scatterplot between the OLS residuals (OLS_RESIDU) and its lagged Residual values of the all Queen neighbor of the original block (OLS-RESIDU). The global Moran's I value of 0.313 suggests that there may be positive spatial autocorrelation of the OLS_RESIDU. Figure 5 also has the permutation result of the global Moran's I, with a p-value of 0.001. We can also see that the Moran's I values (green lines on the right of the hist) in our dataset are much higher than the values in the randomly arranged Moran's I histogram. Based on that, we can reject the null hypothesis and argue that there is significant spatial-autocorrelation.
 #### **Figure 5. OLS Moran’s I and 999 permutation scatterplot*
-![Alt text](5.1.png)![Alt text](5.2.png)
+![Alt text](Pic2/5.1.png)![Alt text](Pic2/5.2.png)
 
 ### **Spatial Lag and Spatial Error Regression**
 We run Spatial Lag and Spatial Error models in both R and GeoDa. Results after running the Spatial Lag Regression are presented in Table 2.
@@ -159,10 +159,10 @@ In the spatial lag regression model, the variable W_LNMEDHVAL represents the ave
 Heteroscedasticity can be tested using the Breusch-Pagan test, which in this case has a p-value less than 0.05, allowing us to reject the null hypothesis of homoscedasticity in favor of the alternative hypothesis of heteroscedasticity of the residuals. In GeoDa, the lower the AIC and SC, the better the fit. The AIC of OLS regression is about 1432.99, which is greater than the spatial lag regression’s AIC (523.48). In this case, The SC of OLS regression is about 1460.24, which is greater than the spatial lag regression’s SC (556.18). We see that the AIC and SC are smaller for the Spatial Lag model, indicating that the Spatial Lag model is a better fit than OLS. The log likelihood of the spatial lag regression is -255.74, which is greater than the OLS regression’s log likelihood (-711.49). Since a higher log likelihood indicates a better fit of the regression, the spatial lag model performs better than the OLS model. According to the p-value of the Likelihood Ratio Test is close to 0 (p <0.05), indicating that we can reject the null hypothesis and conclude that the spatial lag model is a better fit than the OLS regression model.
 
 #### *Table 2. Spatial Lag Regression Output*
-![Alt text](T2.png)
+![Alt text](Pic2/T2.png)
 
 #### *Figure 6. Spatial Lag Regression Moran’s I and permutation scatterplot*
-![Alt text](6.1.png)![Alt text](6.2.png)
+![Alt text](Pic2/6.1.png)![Alt text](Pic2/6.2.png)
 
 The Figure 6 above shows, the Moran's I value of -0.082 suggests that there is negative spatial autocorrelation of the spatial lag residuals, which indicates observations that are closer to each other markedly different values. The Moran's I value for the residuals of the Spatial Lag Regression model is -0.082, while the Moran's I value for the residuals of the OLS Regression model is 0.313. Since the Moran's I value for the Spatial Lag Regression residuals is smaller in magnitude than the Moran's I value for the OLS Regression residuals, this suggests that there is less spatial autocorrelation in the Spatial Lag Regression residuals compared to the OLS Regression residuals. Although the Moran’s I of Spatial Lag Regression is still statistically significant (p-value < 0.05). Based on all of these criteria, Spatial Lag Regression is a better fit than OLS Regression.
 
@@ -172,14 +172,14 @@ In a Spatial Error Regression model, the LAMBDA(λ) term represents the spatial 
 Look at table 3, other four predictors are all statistically significant with p-value smaller than 0.05. The predictors are significant in both OLS and SE models. Besides, coefficients have same signs as in the OLS.
 
 #### *Table 3. Spatial Error Regression Output*
-![Alt text](T3.png)
+![Alt text](Pic2/T3.png)
 
 Heteroscedasticity can be tested using the Breusch-Pagan test, which in this case has a p-value less than 0.05, allowing us to reject the null hypothesis of homoscedasticity in favor of the alternative hypothesis of heteroscedasticity of the residuals. In GeoDa, the lower the AIC and SC, the better the fit. The AIC of OLS regression is about 1432.99, which is greater than the spatial error regression’s AIC (755.38). In this case, The SC of OLS regression is about 1460.24, which is greater than the spatial error regression’s SC (782.63). We see that the AIC and SC are smaller for the Spatial Error model, indicating that the Spatial Error model is a better fit than OLS. The log likelihood of the spatial error regression is -372.69, which is greater than the OLS regression’s log likelihood (-711.49). Since a higher log likelihood indicates a better fit of the regression, the spatial error model performs better than the OLS model. 
 
 The Figure 7 below shows, the Moran's I value of -0.0945 suggests that there is negative spatial autocorrelation of the spatial Error residuals, which indicates observations that are closer to each other markedly different values. The Moran's I value for the residuals of the Spatial Error Regression model is -0.0945, while the Moran's I value for the residuals of the OLS Regression model is 0.313. Since the Moran's I value for the Spatial Error Regression residuals is smaller in magnitude than the Moran's I value for the OLS Regression residuals, this suggests that there is less spatial autocorrelation in the Spatial Error Regression residuals compared to the OLS Regression residuals. Although the Moran’s I of Spatial Error Regression is still statistically significant (p-value < 0.05). Based on all of these criteria, Spatial Error Regression is a better fit than OLS Regression.
 
 #### *Figure 7. Spatial Error Regression Moran’s I and permutation scatterplot*
-![Alt text](7.1.png)![Alt text](7.2.png)
+![Alt text](Pic2/7.1.png)![Alt text](Pic2/7.2.png)
 
 Moran’s I of the Spatial Error Regression residuals is -0.0945, which is similar to the one of the Spatial Lag Regression residuals is -0.0815. Moran’s I from both models are close to zero, which indicates spatial regression models have a substantially lower spatial autocorrelation than in OLS. Because the models are not nested, which using the likelihood-ratio test for this is not reasonable. In the further comparison, the AIC and SC of Spatial Lag Regression are respectively 523.48 and 556.18,while  the AIC and SC of Spatial Error Regression are respectively 755.38 and 782.63. According to the rule that the smaller AIC and SC, the better the model, Spatial Lag model does a better job than Spatial Error model.
 
@@ -189,7 +189,7 @@ In this part, we run GWR model in both R and ArcMap. The GWR results are present
 The Akaike information criterion (AIC) is a measure of the relative quality of a statistical model. In this case, the AIC for the GWR model is 668.92, while the AIC for the spatial lag model is 523.48, the AIC for the spatial error model is 755.38, and the AIC for the LOS model is 1432.99. A lower AIC value indicates a better fit for the data. Based on the AIC values, it appears that the spatial lag model has the best fit, followed by the GWR model, then the spatial error model and the OLS fits the worst. 
 
 #### *Table 4. GWR Results*
-![Alt text](T4.png)
+![Alt text](Pic2/T4.png)
 
 Figure 8 below shows the Moran’s I scatter plot and results of 999 permutations for GWR residuals. A positive value indicates positive spatial autocorrelation, while a negative value indicates negative spatial autocorrelation. The Moran's I for the GWR residuals is 0.021, which is positive but relatively small, indicating that there is some positive spatial autocorrelation in the residuals but it is not particularly strong. The Moran's I for the OLS residuals is 0.313, which is much larger and indicates stronger positive spatial autocorrelation in the residuals.
 
@@ -198,17 +198,17 @@ The Moran's I for the spatial lag residuals is -0.0824, which is negative and in
 Overall, the results suggest that the GWR model, the spatial lag model, and the spatial error model all have relatively low levels of spatial autocorrelation in their residuals, compared to the OLS model.The Moran’s I value of GWR model residuals is closest to -0.006, indicating a better model performance.
 
 #### *Figure 8. Spatial Error Moran’s I and permutation scatterplot*
-![Alt text](8.1.png)![Alt text](8.2.png)
+![Alt text](Pic2/8.1.png)![Alt text](Pic2/8.2.png)
 
 The choropleth map below shows the ratio of the beta coefficients and the standard error estimates for the GWR model. This map shows the spatial distribution of the standardized coefficients for the predictors in the model, with darker blue areas indicating a lower standardized coefficient and darker red areas indicating a higher standardized coefficient. The map also shows the standard error estimates for the coefficients, with light blue and pink areas indicating values with an absolute value less than 2, which may not be statistically significant.
 
 The map indicates that there is strong regional variation in the standardized coefficients for the predictors in the GWR model. There is no positive relationship with the dependent variable that’s possibly significant (dark red area) in PCTVACANT and  LNNBELPOV. Some regions in southern, western, northwestern, and eastern show a negative relationship with the LNMEDHVAL that’s possibly significant in PCTVACANT. While for LNNBELPOV, some regions in northwestern and southeastern corner, east side and the central city also show a negative relationship with the LNMEDHVAL that’s possibly significant. Most areas in Philadelphia, especially the western half, have a positive, possibly significant relationship between PCTBACHMOR and LNNBELPOV. North Philadelphia indicates a positive, possibly significant relationship between PCTSINGLES and LNNBELPOV.
 
 #### *Figure 9. local regression results*
-![Alt text](9.1.png)![Alt text](9.2.png)![Alt text](9.3.png)![Alt text](9.4.png)
+![Alt text](Pic2/9.1.png)![Alt text](Pic2/9.2.png)![Alt text](Pic2/9.3.png)![Alt text](Pic2/9.4.png)
 
 #### *Figure 10. local R-squared results*
-![Alt text](10.1.png)
+![Alt text](Pic2/10.1.png)
 
 The choropleth map in Figure 10 shows the spatial distribution of the local R-squared values for the GWR model across different regions of the city. It is poorly fit with most parts of Philadelphia, especially in the center where local R-squared is below 0.25,such as Center City and part of North Philadelphia. A few parts in northwestern and western Philadelphia show relatively good fit, with higher local R-squared values.The map also suggests that the GWR model may be omitting some important predictors, such as median household income, which could be contributing to the variation in the fit of the model across different regions of the city.
 
