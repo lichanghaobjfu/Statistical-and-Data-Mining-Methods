@@ -434,9 +434,6 @@ Referring to Figures 2 and 3, we can draw inferences regarding the independence 
 
 *Figure 10 - Maps of Standardized Residuals of Regression Model*
 
-$$
-e_i^* \frac{\varepsilon_i}{S} \frac{\varepsilon}{\sqrt\frac{SSE}{n-2}}
-$$
 ![](Pic1/F13.png)
 
 Figure 10 above is the choropleth map of standardized regression residuals. The standardized residuals' spatial patterns can be seen. Further specific operations are required to take into account this geographical clustering since the median house values in the city center are underestimated while they are overestimated towards the north and west of Philadelphia.
