@@ -85,31 +85,38 @@ To explore the data we will begin by examining the summary statistics and distri
 
 As part of our exploratory data analysis we will use these predictors to examine the correlation between the dependent variable (MEDHVAL). A correlation shows the relationship between variables. Thus the correlation coefficient shows the measure of correlation. We utilized the Pearson Correlation Coefficient Formula which ranges between +1 and -1. The further away the correlation coefficient is from zero, the stronger the relationship between the two variables. When the coefficient comes down to zero, then the data is considered as not related. If the value is positive there's a positive correlation, and if the value is negative, there's a negative correlation. The Pearson Correlation Coefficient Formula is as follows:
 
-![](Pic1/Formula1.png)![](Pic1/Formula2.png)
+$$
+r =  \frac{\sum_{i=1}^n(x_i-\overline{x})(y_i-\overline{y})}{\sqrt{\sum_{i=1}^n(x_i-\overline{x})^2}\sqrt{\sum_{i=1}^n(y_i-\overline{y})^2}}\\\
+\\
+r =  \frac{n\sum{xy}-(\sum{x})(\sum{y})}{\sqrt{[n\sum{x}^2-(\sum{x})^2][n\sum{y}^2-(\sum{y})^2]}}
+$$
+
 
 For each (X, Y) pair in our dataset, we need to find the difference between the x value and the mean x value, the difference between the y value and the mean y value, then multiply these two numbers together.  "Σ" is the Greek symbol for Sigma, and it is used in stats to signify that everything should be added up.
 
-- r = Pearson Coefficient
-- n = sample size
-- Σxy = sum of products of the paired variables
-- Σx = sum of the first variables
-- Σy = sum of the second variables (MEDHVAL)
-- Σx^2 = sum of the squared first variables
-- Σy^2 = sum of the squared second variables (MEDHVAL)
+- $r$ = Pearson Coefficient
+- $n$  = sample size
+- $\sum{xy}$ = sum of products of the paired variables
+- $\sum{x}$ = sum of the first variables
+- $\sum{y}$ = sum of the second variables (MEDHVAL)
+- $\sum{x^2}$ = sum of the squared first variables
+- $\sum{y^2}$ = sum of the squared second variables (MEDHVAL)
 
 ### **Multiple Regression Analysis**
 Ordinary Least Squares Regression (OLS) analysis is a statistical technique used to find the relationships between independent and dependent variables. Primarily regression analysis is used as a predictive tool for forecasting or explanatory purposes. Regression analysis measures the strength or correlation between the dependent and independent variables.
 
 Our regression models LNMEDHVAL regressed on PCTVACANT, PCTSINGLES, PCTBACHMOR and LNNBELPOV100 using the equation below:
 
-𝐿𝑁𝑀𝐸𝐷𝐻𝑉𝐴𝐿 = 𝛽0+ 𝛽1𝑃𝐶𝑇𝑉𝐴𝐶𝐴𝑁𝑇 + 𝛽2𝑃𝐶𝑇𝑆𝐼𝑁𝐺𝐿𝐸𝑆 + 𝛽3𝑃𝐶𝑇𝐵𝐴𝐶𝐻𝑀𝑂𝑅 + 𝛽4𝐿𝑁𝐵𝐸𝐿𝑂𝑊𝑃𝑂𝑉100 + 𝜀
+$
+LNMEDHVAL = \beta_0+ \beta_1PCTVACANT + \beta_2𝑃𝐶𝑇𝑆𝐼𝑁𝐺𝐿𝐸𝑆 + \beta_3𝑃𝐶𝑇𝐵𝐴𝐶𝐻𝑀𝑂𝑅 + \beta_4𝐿𝑁𝐵𝐸𝐿𝑂𝑊𝑃𝑂𝑉100 + \varepsilon
+$
 
-In this equation 𝛽1 is the coefficient variables of xi, (for example, 𝛽1 PCTVACANT) and it shows the average change in dependent variable y (LNMEDHVAL) associated with a 1-unit increase in the predictor xi (holding all other variables constant). 𝛽0 is the y-intercept, which means that it is the value of the dependent variable when all predictors are 0. 𝛽1 changes in different samples, so it is a random variable. The variable ε is referred to as the residual, which is the difference between yi and ŷ.  ŷ is the predicted value of the response variable, 𝛽0 is the y-intercept, 𝛽1  is the regression coefficient, 𝛽2, 𝛽3, and 𝛽4 are coefficients of the other predictors, and x is the value of the predictor variable.
+In this equation $\beta_1$ is the coefficient variables of $x_i$, (for example, $\beta_1$ PCTVACANT) and it shows the average change in dependent variable $y$ (LNMEDHVAL) associated with a 1-unit increase in the predictor $x_i$ (holding all other variables constant). $\beta_0$ is the y-intercept, which means that it is the value of the dependent variable when all predictors are 0. $\beta_1$ changes in different samples, so it is a random variable. The variable $\varepsilon$ is referred to as the residual, which is the difference between $y_i$ and $\^y$. $\^y$ is the predicted value of the response variable, $\beta_0$ is the y-intercept, $\beta_1$  is the regression coefficient, $\beta_2$, $\beta_3$, and $\beta_4$ are coefficients of the other predictors, and x is the value of the predictor variable.
 
-- y ̂: The estimated value of the response variable
-- 𝛽0: The average value of the response variable when the predictor variable is zero
-- 𝛽1: The average change in the response variable associated with a one unit increase in the predictor variable
-- ε: The residual which is the difference between the actual LNMEDHVAL and predicted MEDHVAL
+- $y$ : The estimated value of the response variable
+- $\beta_0$: The average value of the response variable when the predictor variable is zero
+- $\beta_1$: The average change in the response variable associated with a one unit increase in the predictor variable
+- $\varepsilon$: The residual which is the difference between the actual LNMEDHVAL and predicted MEDHVAL
 
 Four assumptions must be met for the results of a linear regression model to be valid and reliable and they are as follows:
 
@@ -122,48 +129,87 @@ Four assumptions must be met for the results of a linear regression model to be 
 
 If one or more of these assumptions are violated, then the results of our linear regression may be unreliable or even misleading.
 
-There are several parameters that need to be estimated in the regression including σ2 and 𝛽0 through 𝛽k. The parameter σ2 determines the amount of variability inherent in the regression model. When the predictor is 1, only regression lines need to be dealt with.  If σ2 is small, then the pairs (xi, yi) are going to fall very close to the true line.  If σ2 is large, then the pairs (xi, yi) are going to be quite spread out about the true regression line. The fitted (or predicted) values ŷ1, ŷ2 ,…, ŷn are obtained by substituting x1,…,xn into the equation of the estimated regression line, so: 
+There are several parameters that need to be estimated in the regression including $\sigma_2$ and $\beta_0$ through $\beta_k$. The parameter $\sigma_2$ determines the amount of variability inherent in the regression model. When the predictor is 1, only regression lines need to be dealt with.  If $\sigma_2$ is small, then the pairs ($x_i$, $y_i$) are going to fall very close to the true line.  If $\sigma_2$ is large, then the pairs ($x_i$, $y_i$) are going to be quite spread out about the true regression line. The fitted (or predicted) values $\^y_1$, $\^y_2$,…, $\^y_n$ are obtained by substituting $\^x_1$,…, $\^x_n$ into the equation of the estimated regression line, so: 
 
-![](Pic1/Formula3.png)
+$$
+\^y_2 = \^\beta_0 + \^\beta_1x_2
+$$
+$$
+\^y_2 = \^\beta_0 + \^\beta_1x_n
+$$
 
-Meaning that ŷ1MEDHVAL = 𝛽0+ 𝛽1𝑃𝐶𝑇𝑉𝐴𝐶𝐴𝑁𝑇,  ŷ2MEDHVAL = 𝛽0+ 𝛽2𝑃𝐶𝑇𝑆𝐼𝑁𝐺𝐿𝐸𝑆, etc
+Meaning that $\^y_1$*MEDHVAL* = $\beta_0$+ $\beta_1$*PCTVACANT*,  $\^y_2$*MEDHVAL* = $\beta_0$+ $\beta_2$*PCTSINGLES*, etc
 
 As mentioned above the residuals are vertical deviations from the estimated line
 
-![](Pic1/Formula4.png)
+$$
+\varepsilon_1 = y_1-\^y_1\\
+\varepsilon_2 = y_2-\^y_2\\
+\varepsilon_n = y_n-\^y_n
+$$
 
-σ2 is the variance of residuals 𝜀. The estimator of σ2 is 𝑠2, and can be calculated in the equation below:
 
-![](Pic1/Formula5.png)
+$\sigma_2$ is the variance of residuals $\varepsilon$. The estimator of $\sigma_2$ is $s_2$, and can be calculated in the equation below:
+
+$$
+\^\sigma^2 = s^2 = \frac{SSE}{n-k+1}
+$$
 
 Here, 𝑘 is the number of predictors and n is the number of observations. Additionally, Least squares estimates for  ̂β0,…,  ̂βk are obtained when the quantity above for the Error Sum of Squares (SSE) is minimized. Which can be calculated in the equation below: 
 
-![](Pic1/Formula6.png)
+$$
+SSE = \displaystyle\sum_{i=1}^{n}\varepsilon^2 = \displaystyle\sum_{i=1}^{n}(y-\^y)^2
+$$
 
 Given n observations on y, and k predictors x1 … xk, the estimates ̂β0, ̂β1, ̂β2,…,  ̂βk are chosen simultaneously to minimize the expression for the Error Sum of Squares (SSE), given by:
-![](Pic1/Formula7.png)
+
+$
+SSE=\displaystyle\sum_{i=1}^{n}\varepsilon^2 = \displaystyle\sum_{i=1}^{n}(y-\^y)^2 = \displaystyle\sum_{i=1}^{n}(y_i-\^\beta_0-\^\beta_1x_{1i}-\^\beta_2x_{2i}-\dotsc-\^\beta_kx_{ki})^2
+$
 
 Coefficient of multiple determination, 𝑅2, is the proportion of observed variation in the dependent variable 𝑦 that was explained by the model. 𝑅2 can be calculated by:
 
-![](Pic1/Formula8.png)
-![](Pic1/Formula9.png)
-![](Pic1/Formula10.png)
-![](Pic1/Formula11.png)
+$$
+R^2=1-\frac{SSE}{SST}=\frac{SSR}{SST}\\\
+\\
+SSE=\displaystyle\sum_{i=1}^n\varepsilon^2=\displaystyle\sum_{i=1}^n(y-\^y)^2\\\
+\\
+SST=\displaystyle\sum_{i=1}^n(y-\overline{y})^2\\\
+\\
+SSR=SST-SSE
+$$
 
-Also, as in simple regression,![](Pic1/Formula12.png)
+
+
+Also, as in simple regression,
+
+$$
+SST=\sum(y_i-\overline{y}_i)^2\ {and}\ {R^2=1-\frac{SSE}{SST}}
+$$
+
 
 Here, R2 is the coefficient of multiple determination, or the proportion of variance in the model explained by all k predictors.
 
-Because extra predictors will generally increase R2, it is typically adjusted for the number of predictors:![](Pic1/Formula13.png)
+Because extra predictors will generally increase R2, it is typically adjusted for the number of predictors:
+
+$$
+R_{adj}^2=\frac{(n-1)R^2-k}{n-(k+1)}
+$$
 
 Before doing a hypothesis test for each individual predictor we do a so-called model utility test, referred to as the F-ratio, or the F-test. The F-ratio is used to test the null hypothesis (H0) that all of the regression coefficients (βi’s) are equal to zero against the alternative hypothesis (Ha) that at least one of the regression coefficients is not equal to zero. For each of the βi's, we are testing the null hypothesis (H0) that the coefficient is equal to zero against the alternative hypothesis (Ha) that the coefficient is not equal to zero.
 
 The F-test is completed using the following formulas:
-
-![](Pic1/Formula14.png)
+$$
+H_0:\beta_1=\beta_2=\dotsc=\beta_k=0\\\
+\\
+H_1:\beta_1\neq0\ or\ \beta\neq0\dotsc\beta_k\neq0
+$$
 
 On the other hand, the T-test, examines the p-value associated with each independent variable 𝑥i.
-![](Pic1/Formula15.png)
+
+$H_0:\beta_i=0$, $x_i$ is not a significant predictor of $y$.
+$H_1:\beta_i\neq0$, $x_i$ is a significant predictor of $y$.
+
 
 If the p-value for βi= 0 is less than 0.05, the null hypothesis is rejected, determining that 𝑥( is a significant predictor of 𝑦. When the null hypothesis cannot be rejected, the dependent variable is not related to the independent variable
 
@@ -175,8 +221,10 @@ K-fold cross-validation is a type of model validation technique used in machine 
 𝑅𝑀𝑆𝐸 stands for root mean square error, which is an estimate of the magnitude of a typical
 residual. It is often used to compare different models. The model that has the smaller 𝑅𝑀𝑆𝐸 is
 the better model.
+$$
+RMSE=\sqrt{MSE}=\sqrt{\frac{\sum_{i=1}^n(y-\^y)^2}{n}}
+$$
 
-![Alt text](Pic1/Formula16.png)
 
 To conduct this data analysis we used R program and for the maps created we used ArcGIS
 
@@ -230,7 +278,7 @@ tregData <-
 				 )
 ```
 
-##### *Figure 1 - Predictor Distributions and Log Transformed Predictors*
+*Figure 1 - Predictor Distributions and Log Transformed Predictors*
 
 ```{r, fig.width=12, fig.height=18}
 par(mfrow=c(5,2))
@@ -256,14 +304,14 @@ On the other hand, PCTVACANT is close to zero for much of Northeast Philadelphia
 
 Combined with Figure 3, which displays the dependent variable, Log of MHV. There are highly similar clusters between the Log of MHV and PCTMACHMOR, displaying a highly positive relationship between these two variables. Also, the Log of MHV and PCTVACANT have opposite clusters, displaying a negative relationship between these two variables.
 
-##### *Figure 2 - Maps of predictor Variables*
+*Figure 2 - Maps of predictor Variables*
 
 ![Alt text](Pic1/F2.png)
 ![Alt text](Pic1/F3.png)
 ![Alt text](Pic1/F4.png)
 ![Alt text](Pic1/F5.png)
 
-##### *Figure 3 - Log of MHV*
+*Figure 3 - Log of MHV*
 
 ![](Pic1/F6.png)
 
@@ -284,7 +332,7 @@ regressionVarsCor <- dtregdata %>%
 matrix <- cor(regressionVarsCor)
 matrix
 ```
-##### *Figure 4 - Correlation Matrix*
+*Figure 4 - Correlation Matrix*
 
 ```{r}
 ggcorrplot(cor(regressionVarsCor),outline.col = "white",lab =T)
@@ -293,7 +341,7 @@ ggcorrplot(cor(regressionVarsCor),outline.col = "white",lab =T)
 
 In addition, multicollinearity is assessed by regression for each predictor k for all remaining predictors. Figure 5 shows the VIF of each predictor. No VIFS is larger than 4, so there is no multicollinearity problem.
 
-##### *Figure 5 - VIFs of predictors*
+*Figure 5 - VIFs of predictors*
 
 ```{r class.source = 'fold-show'}
 predLM <- lm(LNMEDHVAL ~ PCTBACHMOR+PCTVACANT+PCTSINGLES+LNNBELPOV100, data = regressionVars)
@@ -302,7 +350,8 @@ vif(predLM)
 ```
 
 ### **Regression Results**
-##### *Figure 6 - R Summary of Regression*
+
+*Figure 6 - R Summary of Regression*
 ```{r}
 predLM <- lm(LNMEDHVAL ~ PCTBACHMOR+PCTVACANT+PCTSINGLES+LNNBELPOV100, data = regressionVars)
 ```
@@ -325,9 +374,9 @@ More than 60% of the variance in the dependent variable is explained by the mode
 
 This section is about testing model assumptions and aptness.
 
-Assumption 1, linear relationship between dependent variable y and every predictor xi, is violated. From figure 6, a linear relationship cannot be observed, which means the assumption of linear relationship cannot be met and there will undoubtedly result in some bias in the estimate of y.When predictors are 0, MHV still has value with different predictors. This might not be realistic to see a situation when all 4 predictors are 0 in real life. Not something we should worry about though.
+Assumption 1, linear relationship between dependent variable y and every predictor $x_i$, is violated. From figure 6, a linear relationship cannot be observed, which means the assumption of linear relationship cannot be met and there will undoubtedly result in some bias in the estimate of y.When predictors are 0, MHV still has value with different predictors. This might not be realistic to see a situation when all 4 predictors are 0 in real life. Not something we should worry about though.
 
-##### *Figure 7 - R Summary of Regression*
+*Figure 7 - R Summary of Regression*
 
 ```{r, fig.width=9, fig.height=9}
 par(mfrow=c(2,2))
@@ -339,7 +388,7 @@ plot(dtregdata$PCTSINGLES, dtregdata$LNMEDHVAL)
 
 Assumption 2, residuals being normally distributed, is basically valid.  Figure 8 indicates that the Standard Residuals are close to normal distribution, meaning the assumption of normality of residuals is not violated. Normality is essential for all sample sizes to predict future values of the dependent variable (Here is the Median House Value).
 
-##### *Figure 8 - Histogram of Residuals*
+*Figure 8 - Histogram of Residuals*
 
 ```{r, results='hide'}
 anova(predLM)
@@ -357,7 +406,7 @@ Assumption 3, homoscedastic of variance of the residuals, is violated. By using 
 
 Figure 9 shows the relationship between standardized residual (on y-axis) and the predicted value (on x-axis). The variance of residuals seems not constant for different values of predictors (or y-hat). Clearly, this is heteroscedasticity, and a non-linear model would better describe the relationship among the variables.  The plots show that the residuals are positive for low interval, positive for high interval. And there are some outliers in the graph especially in the low and high intervals in predicted house value. Many outliers are 4-6 standard deviations away from 0, which are distributed across the range of small and large x values. In the middle interval of the predicted house value, the standardized residuals are concentrated around zero with few outliers.
 
-##### *Figure 9 - Standard Residuals by Predicted Value*
+*Figure 9 - Standard Residuals by Predicted Value*
 
 ```{r}
 predLM <- lm(LNMEDHVAL ~ PCTBACHMOR+PCTVACANT+PCTSINGLES+LNNBELPOV100, data = regressionVars)
@@ -384,7 +433,9 @@ g_reg = ggplot(reg_result, aes(x = predFit, y = predR_stand)) +
 Assumption 4, independence of observations, is violated.
 
 Referring to Figures 2 and 3, we can draw inferences regarding the independence of the observations. Similar data tend to cluster in space, and it is simple to see spatial autocorrelation from those maps. A factor with a strong geographic relationship is median house value, for which spatial autocorrelation is inevitable. As a result, the independent observation assumption is invalid. Additionally, because they are not taken into account in multiple regression, this spatial autocorrelation may be able to explain why standardized residuals are heteroscedastic
-#### *Figure 10 - Maps of Standardized Residuals of Regression Model*
+
+*Figure 10 - Maps of Standardized Residuals of Regression Model*
+
 ![](Pic1/F13.png)
 
 Figure 10 above is the choropleth map of standardized regression residuals. The standardized residuals' spatial patterns can be seen. Further specific operations are required to take into account this geographical clustering since the median house values in the city center are underestimated while they are overestimated towards the north and west of Philadelphia.
@@ -393,7 +444,8 @@ Figure 10 above is the choropleth map of standardized regression residuals. The 
 
 All four predictors from the original model are retained in the final model as a result of stepwise regression, making the original model the best model with the lowest AIC. The procedure's output is displayed below in Figure 11.
 
-##### *Figure 11 – Stepwise Regression Results*
+*Figure 11 – Stepwise Regression Results*
+
 ```{r class.source = 'fold-show', max.height='800px', collapse = TRUE}
 step <- stepAIC(predLM, direction="both")
 ```
@@ -409,11 +461,12 @@ This report employed OLS regression to create a predictive model of median house
 
 The F-ratio test indicates that the model is significant, yet R2 is only 0.6615, indicating that only 66% of the variance in the model is explained by the 4 predictors. To improve the quality of the model, it is recommended to include additional predictors, such as the type of zoning code, average built year of houses, transportation coverage rate, amenities (parks, schools, hospitals) and crime rate.
 
-The stepwise regression model included all 4 predictors, indicating that sufficient predictors were not excluded. This suggests that all 4 predictors are likely to be significant. The 𝑅𝑀𝑆𝐸4-predcitor of 0.367 is higher than the 𝑅𝑀𝑆𝐸2-predictor of 0.443, demonstrating the combined effect of the percentage of singles, the percentage of bachelor, the percentage of vacant and number of poverty variables on the overall quality of the model.
+The stepwise regression model included all 4 predictors, indicating that sufficient predictors were not excluded. This suggests that all 4 predictors are likely to be significant. The $𝑅𝑀𝑆𝐸_{4-predcitor}$ of 0.367 is higher than the $𝑅𝑀𝑆𝐸_{2-predictor}$ of 0.443, demonstrating the combined effect of the percentage of singles, the percentage of bachelor, the percentage of vacant and number of poverty variables on the overall quality of the model.
 
-![](Pic1/F15.png)
+$
+RMSE_{4-predictor}=0.366,RMSE_{2-predictor}= 0.443
+$
 
 The model has several limitations. Firstly, the assumption of OLS that there is a linear relationship between the dependent variable and the predictors is not fulfilled, leading to a decrease in the model's significance and accuracy. Secondly, the homoscedasticity of the residuals’ variance is not met, resulting in systematic under or over-prediction. To address this issue, adding predictors or using spatial regression could be helpful. Thirdly, the independence of observations is broken since there are distinct clustering patterns in predictors, dependent variable, and residuals; thus, running a spatial regression like SE, SL, or GWR instead of OLS regression would be more effective.
 
 Due to spatial nonuniformity, the predictor NBELPOV100 in the model is not an accurate representation of poverty levels as it does not take into account the clustering of population in Philadelphia. To address this issue, it would be more appropriate to use the percentage of individuals living in poverty instead.
-
