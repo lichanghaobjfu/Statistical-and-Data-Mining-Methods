@@ -107,11 +107,9 @@ Ordinary Least Squares Regression (OLS) analysis is a statistical technique used
 
 Our regression models LNMEDHVAL regressed on PCTVACANT, PCTSINGLES, PCTBACHMOR and LNNBELPOV100 using the equation below:
 
-$
-LNMEDHVAL = \beta_0+ \beta_1PCTVACANT + \beta_2𝑃𝐶𝑇𝑆𝐼𝑁𝐺𝐿𝐸𝑆 + \beta_3𝑃𝐶𝑇𝐵𝐴𝐶𝐻𝑀𝑂𝑅 + \beta_4𝐿𝑁𝐵𝐸𝐿𝑂𝑊𝑃𝑂𝑉100 + \varepsilon
-$
+$LNMEDHVAL$ =$\beta_0$+ $\beta_1PCTVACANT$ + $\beta_2PCTSINGLES$ + $\beta_3PCTBEACHMOR$ + $\beta_4LNBELOWPOV100$ + $\varepsilon$
 
-In this equation $\beta_1$ is the coefficient variables of $x_i$, (for example, $\beta_1$ PCTVACANT) and it shows the average change in dependent variable $y$ (LNMEDHVAL) associated with a 1-unit increase in the predictor $x_i$ (holding all other variables constant). $\beta_0$ is the y-intercept, which means that it is the value of the dependent variable when all predictors are 0. $\beta_1$ changes in different samples, so it is a random variable. The variable $\varepsilon$ is referred to as the residual, which is the difference between $y_i$ and $\^y$. $\^y$ is the predicted value of the response variable, $\beta_0$ is the y-intercept, $\beta_1$  is the regression coefficient, $\beta_2$, $\beta_3$, and $\beta_4$ are coefficients of the other predictors, and x is the value of the predictor variable.
+In this equation $\beta_1$ is the coefficient variables of $x_i$, (for example, $\beta_1$ PCTVACANT) and it shows the average change in dependent variable $y$ (LNMEDHVAL) associated with a 1-unit increase in the predictor $x_i$ (holding all other variables constant). $\beta_0$ is the y-intercept, which means that it is the value of the dependent variable when all predictors are 0. $\beta_1$ changes in different samples, so it is a random variable. The variable $\varepsilon$ is referred to as the residual, which is the difference between $y_i$ and $\hat{y}$. $\hat{y}$ is the predicted value of the response variable, $\beta_0$ is the y-intercept, $\beta_1$  is the regression coefficient, $\beta_2$, $\beta_3$, and $\beta_4$ are coefficients of the other predictors, and x is the value of the predictor variable.
 
 - $y$ : The estimated value of the response variable
 - $\beta_0$: The average value of the response variable when the predictor variable is zero
@@ -129,42 +127,42 @@ Four assumptions must be met for the results of a linear regression model to be 
 
 If one or more of these assumptions are violated, then the results of our linear regression may be unreliable or even misleading.
 
-There are several parameters that need to be estimated in the regression including $\sigma_2$ and $\beta_0$ through $\beta_k$. The parameter $\sigma_2$ determines the amount of variability inherent in the regression model. When the predictor is 1, only regression lines need to be dealt with.  If $\sigma_2$ is small, then the pairs ($x_i$, $y_i$) are going to fall very close to the true line.  If $\sigma_2$ is large, then the pairs ($x_i$, $y_i$) are going to be quite spread out about the true regression line. The fitted (or predicted) values $\^y_1$, $\^y_2$,…, $\^y_n$ are obtained by substituting $\^x_1$,…, $\^x_n$ into the equation of the estimated regression line, so: 
+There are several parameters that need to be estimated in the regression including $\sigma_2$ and $\beta_0$ through $\beta_k$. The parameter $\sigma_2$ determines the amount of variability inherent in the regression model. When the predictor is 1, only regression lines need to be dealt with.  If $\sigma_2$ is small, then the pairs ($x_i$, $y_i$) are going to fall very close to the true line.  If $\sigma_2$ is large, then the pairs ($x_i$, $y_i$) are going to be quite spread out about the true regression line. The fitted (or predicted) values $\hat{y}_1$, $\hat{y}_2$,…, $\hat{y}_n$ are obtained by substituting $\hat{x}_1$,…, $\hat{x}_n$ into the equation of the estimated regression line, so: 
 
 $$
-\^y_2 = \^\beta_0 + \^\beta_1x_2
+\hat{y}_2 = \hat{\beta}_0 + \hat{\beta}_1x_2
 $$
 $$
-\^y_2 = \^\beta_0 + \^\beta_1x_n
+\hat{y}_2 = \hat{\beta}_0 + \hat{\beta}_1x_n
 $$
 
-Meaning that $\^y_1$*MEDHVAL* = $\beta_0$+ $\beta_1$*PCTVACANT*,  $\^y_2$*MEDHVAL* = $\beta_0$+ $\beta_2$*PCTSINGLES*, etc
+Meaning that $\hat{y}_1$*MEDHVAL* = $\beta_0$+ $\beta_1$*PCTVACANT*,  $\hat{y}_2$*MEDHVAL* = $\beta_0$+ $\beta_2$*PCTSINGLES*, etc
 
 As mentioned above the residuals are vertical deviations from the estimated line
 
 $$
-\varepsilon_1 = y_1-\^y_1\\
-\varepsilon_2 = y_2-\^y_2\\
-\varepsilon_n = y_n-\^y_n
+\varepsilon_1 = y_1-\hat{y}_1\\
+\varepsilon_2 = y_2-\hat{y}_2\\
+\varepsilon_n = y_n-\hat{y}_n
 $$
 
 
 $\sigma_2$ is the variance of residuals $\varepsilon$. The estimator of $\sigma_2$ is $s_2$, and can be calculated in the equation below:
 
 $$
-\^\sigma^2 = s^2 = \frac{SSE}{n-k+1}
+\hat{\sigma}^2 = s^2 = \frac{SSE}{n-k+1}
 $$
 
 Here, 𝑘 is the number of predictors and n is the number of observations. Additionally, Least squares estimates for  ̂β0,…,  ̂βk are obtained when the quantity above for the Error Sum of Squares (SSE) is minimized. Which can be calculated in the equation below: 
 
 $$
-SSE = \displaystyle\sum_{i=1}^{n}\varepsilon^2 = \displaystyle\sum_{i=1}^{n}(y-\^y)^2
+SSE = \displaystyle\sum_{i=1}^{n}\varepsilon^2 = \displaystyle\sum_{i=1}^{n}(y-\hat{y})^2
 $$
 
 Given n observations on y, and k predictors x1 … xk, the estimates ̂β0, ̂β1, ̂β2,…,  ̂βk are chosen simultaneously to minimize the expression for the Error Sum of Squares (SSE), given by:
 
 $
-SSE=\displaystyle\sum_{i=1}^{n}\varepsilon^2 = \displaystyle\sum_{i=1}^{n}(y-\^y)^2 = \displaystyle\sum_{i=1}^{n}(y_i-\^\beta_0-\^\beta_1x_{1i}-\^\beta_2x_{2i}-\dotsc-\^\beta_kx_{ki})^2
+SSE=\displaystyle\sum_{i=1}^{n}\varepsilon^2 = \displaystyle\sum_{i=1}^{n}(y-\hat{y})^2 = \displaystyle\sum_{i=1}^{n}(y_i-\hat{\beta}_0-\hat{\beta}_1x_{1i}-\hat{\beta}_2x_{2i}-\dotsc-\hat{\beta}_kx_{ki})^2
 $
 
 Coefficient of multiple determination, 𝑅2, is the proportion of observed variation in the dependent variable 𝑦 that was explained by the model. 𝑅2 can be calculated by:
@@ -172,7 +170,7 @@ Coefficient of multiple determination, 𝑅2, is the proportion of observed vari
 $$
 R^2=1-\frac{SSE}{SST}=\frac{SSR}{SST}\\\
 \\
-SSE=\displaystyle\sum_{i=1}^n\varepsilon^2=\displaystyle\sum_{i=1}^n(y-\^y)^2\\\
+SSE=\displaystyle\sum_{i=1}^n\varepsilon^2=\displaystyle\sum_{i=1}^n(y-\hat{y})^2\\\
 \\
 SST=\displaystyle\sum_{i=1}^n(y-\overline{y})^2\\\
 \\
@@ -222,7 +220,7 @@ K-fold cross-validation is a type of model validation technique used in machine 
 residual. It is often used to compare different models. The model that has the smaller 𝑅𝑀𝑆𝐸 is
 the better model.
 $$
-RMSE=\sqrt{MSE}=\sqrt{\frac{\sum_{i=1}^n(y-\^y)^2}{n}}
+RMSE=\sqrt{MSE}=\sqrt{\frac{\sum_{i=1}^n(y-\hat{y})^2}{n}}
 $$
 
 
@@ -436,6 +434,9 @@ Referring to Figures 2 and 3, we can draw inferences regarding the independence 
 
 *Figure 10 - Maps of Standardized Residuals of Regression Model*
 
+$$
+e_i^* \frac{\varepsilon_i}{S} \frac{\varepsilon}{\sqrt\frac{SSE}{n-2}}
+$$
 ![](Pic1/F13.png)
 
 Figure 10 above is the choropleth map of standardized regression residuals. The standardized residuals' spatial patterns can be seen. Further specific operations are required to take into account this geographical clustering since the median house values in the city center are underestimated while they are overestimated towards the north and west of Philadelphia.
@@ -463,9 +464,9 @@ The F-ratio test indicates that the model is significant, yet R2 is only 0.6615,
 
 The stepwise regression model included all 4 predictors, indicating that sufficient predictors were not excluded. This suggests that all 4 predictors are likely to be significant. The $𝑅𝑀𝑆𝐸_{4-predcitor}$ of 0.367 is higher than the $𝑅𝑀𝑆𝐸_{2-predictor}$ of 0.443, demonstrating the combined effect of the percentage of singles, the percentage of bachelor, the percentage of vacant and number of poverty variables on the overall quality of the model.
 
-$
+$$
 RMSE_{4-predictor}=0.366,RMSE_{2-predictor}= 0.443
-$
+$$
 
 The model has several limitations. Firstly, the assumption of OLS that there is a linear relationship between the dependent variable and the predictors is not fulfilled, leading to a decrease in the model's significance and accuracy. Secondly, the homoscedasticity of the residuals’ variance is not met, resulting in systematic under or over-prediction. To address this issue, adding predictors or using spatial regression could be helpful. Thirdly, the independence of observations is broken since there are distinct clustering patterns in predictors, dependent variable, and residuals; thus, running a spatial regression like SE, SL, or GWR instead of OLS regression would be more effective.
 
