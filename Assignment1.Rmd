@@ -400,7 +400,9 @@ hist(predLM$predRStand,breaks = 80)
 
 Assumption 3, homoscedastic of variance of the residuals, is violated. By using standardized residuals, the residuals of the different observations can be compared to each observation. Standard Residuals are the raw residuals divided by the standard error of estimate. It can be calculated through the following formula.
 
-![](Pic1/Formula17.png)
+$$
+e_i^*\approx\frac{\varepsilon_i}{S}\approx\frac{\varepsilon_i}{\sqrt\frac{SSE}{n-2}}
+$$
 
 Figure 9 shows the relationship between standardized residual (on y-axis) and the predicted value (on x-axis). The variance of residuals seems not constant for different values of predictors (or y-hat). Clearly, this is heteroscedasticity, and a non-linear model would better describe the relationship among the variables.  The plots show that the residuals are positive for low interval, positive for high interval. And there are some outliers in the graph especially in the low and high intervals in predicted house value. Many outliers are 4-6 standard deviations away from 0, which are distributed across the range of small and large x values. In the middle interval of the predicted house value, the standardized residuals are concentrated around zero with few outliers.
 
