@@ -52,12 +52,13 @@ $$
 I=\frac{(\frac{\sum_{i=1}^n\sum_{j=1}^nw_{ij}(X_i-\overline{X})(X_j-\overline{X})}{\sum_{i=1}^n\sum_{j=1}^nw_{ij}})}{(\frac{\sum_{i=1}^n(X_i-\overline{X})^2}{n})}
 $$
 
-Where<br>
-- $\overline{X}$ is the mean of the variable $X$<br>
-- $X_i$ is the variable value at a particular location $i$<br>
-- $X_j$ is the variable value at another location $j$<br>
-- $W_{ij}$ is a weight indexing location of $i$ relative to $j$<br>
-- $n$ is the number of observations (points or areal units)<br>
+Where
+
+- $\overline{X}$ is the mean of the variable $X$
+- $X_i$ is the variable value at a particular location $i$
+- $X_j$ is the variable value at another location $j$
+- $W_{ij}$ is a weight indexing location of $i$ relative to $j$
+- $n$ is the number of observations (points or areal units)
 
 The Queen weight matrix is a commonly used spatial weight matrix in spatial analysis. It is used to identify the spatial relationships between the observations in a data set. The Queen weight matrix assigns each observation a weight based on the number of neighboring observations that it shares a common boundary with. This weight is equal to 1 if the observation shares an edge or vertex and 0 if it does not. Therefore, the Queen weight matrix effectively creates a spatial graph of the observations, with each observation connected to its neighbors.  When we have n observations, we form an n x n table (called a weight matrix or a link matrix) which summarizes all the pairwise spatial relationships in the dataset
 
@@ -89,28 +90,30 @@ We will be using GeoDa to run spatial lag and spatial error regressions. Spatial
 𝐿𝑁𝑀𝐸𝐷𝐻𝑉𝐴𝐿 = $\beta_0$+ $\beta_1$𝑃𝐶𝑇𝑉𝐴𝐶𝐴𝑁𝑇 + $\beta_2$𝑃𝐶𝑇𝑆𝐼𝑁𝐺𝐿𝐸𝑆 + $\beta_3$𝑃𝐶𝑇𝐵𝐴𝐶𝐻𝑀𝑂𝑅 + $\beta_4$𝐿𝑁𝐵𝐸𝐿𝑂𝑊𝑃𝑂𝑉100 + $ρ*WY$+ $\varepsilon$
 
 
-Where:<br>
-- LNMEDHVAL = The outcome variable 
-- $\beta_0,\beta_1,\beta_2,\beta_3,\beta_4$ = Coefficients of the predictors 
-- PCTVACANT = Percent of vacant housing units 
-- PCTSINGLES = Percent of single-person households 
-- PCTBACHMORE = Percent of households with bachelor’s degree or higher 
-- NBELPOV = Number of people in poverty 
-- $WY$ = Spatial weights matrix 
-- $\rho$ = Spatial autocorrelation coefficient 
+Where
+
+- LNMEDHVAL = The outcome variable
+- $\beta_0,\beta_1,\beta_2,\beta_3,\beta_4$ = Coefficients of the predictors
+- PCTVACANT = Percent of vacant housing units
+- PCTSINGLES = Percent of single-person households
+- PCTBACHMORE = Percent of households with bachelor’s degree or higher
+- NBELPOV = Number of people in poverty
+- $WY$ = Spatial weights matrix
+- $\rho$ = Spatial autocorrelation coefficient
 - $\varepsilon$ = Error term
 
 In spatial error regression, a specific type of multivariate regression analysis, the spatial structure of the data is taken into account by adjusting the regression coefficients to capture the spatial relationships among the variables. This method is used when an omitted spatial variable in the regression leads to spatial autocorrelation in the residuals, rather than in the dependent variable. By including a spatial error term in the model, the coefficients of the independent variables are adjusted to account for the spatial relationships, which improves the accuracy of the regression results. The spatial error model equation is:
 
 𝐿𝑁𝑀𝐸𝐷𝐻𝑉𝐴𝐿 = $\beta_0$+ $\beta_1$𝑃𝐶𝑇𝑉𝐴𝐶𝐴𝑁𝑇 + $\beta_2$𝑃𝐶𝑇𝑆𝐼𝑁𝐺𝐿𝐸𝑆 + $\beta_3$𝑃𝐶𝑇𝐵𝐴𝐶𝐻𝑀𝑂𝑅 + $\beta_4$𝐿𝑁𝐵𝐸𝐿𝑂𝑊𝑃𝑂𝑉100 + $\lambda*S$ + $\varepsilon$ + $u$
 
-Where: <br>
-- LNMEDHVAL = Dependent variable 
-- $\beta_0$ = Intercept 
-- $\beta_0,\beta_1,\beta_2,\beta_3,\beta_4$ = Coefficients for predictors PCTVACANT, PCTSINGLES, PCTBACHMORE, and NBELPOV, respectively 
-- $\lambda$ = Coefficient of the spatial error term. Usually, Weight matrix is referred to by W.
-- $S$ = Spatial weights matrix 
-- $\varepsilon$ = Error term 
+Where
+
+- LNMEDHVAL = Dependent variable
+- $\beta_0$ = Intercept
+- $\beta_0,\beta_1,\beta_2,\beta_3,\beta_4$ = Coefficients for predictors PCTVACANT, PCTSINGLES, PCTBACHMORE, and NBELPOV, respectively
+- $\lambda$ = Coefficient of the spatial error term. Usually, Weight matrix is referred to by $W$
+- $S$ = Spatial weights matrix
+- $\varepsilon$ = Error term
 - $u$ = Spatial random effect
 
 The assumptions that are needed for OLS are still needed for both spatial lag and spatial error regression models, with the exception of the assumption of spatial independence of observations. For spatial lag and spatial error regression models, the assumption of spatial dependence of observations is necessary. This means that observations must be assumed to interact with each other, and the strength and direction of this interaction must be specified in the model. Other assumptions that are necessary for both spatial lag and spatial error regression models include linearity, no omitted variables, no perfect multicollinearity, homoscedasticity, and normality of errors.
@@ -141,10 +144,11 @@ $$
 y_i=\beta_{i0}+\beta_{i1}x_{i1}+\beta_{i2}x_{i2}+\dotsc+\beta_{im}x_{im}+\varepsilon=\beta_{i0}+\displaystyle\sum_{k=1}^m\beta_{ik}x_{ik}+\varepsilon_i
 $$
 
-Where:<br> 
-- $Y_i$ = is the dependent variable 
-- $\beta_{i0}$ = Intercept 
-- $m$ = independent variables ($x_{𝑖1}, x_{𝑖2}, ..., x_{𝑖𝑚}$) 
+Where
+
+- $Y_i$ = is the dependent variable
+- $\beta_{i0}$ = Intercept
+- $m$ = independent variables ($x_{𝑖1}, x_{𝑖2}, ..., x_{𝑖𝑚}$)
 - $\beta_{𝑖𝑘}$ terms are coefficients that indicate the strength of the relationship between each independent variable and the dependent variable
 - $\varepsilon$ = the error term 
 
