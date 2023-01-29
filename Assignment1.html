@@ -2093,24 +2093,26 @@ the median house value changes by (1.01 ^(-0.79)-1)*100% or -0.078%,
 holding all other variables constant.</p>
 <p>The p-value of less than 0.0001 for PCTVACANT indicates that if there
 is no actual relationship between PCTVACANT and MEDHVAL, (if the null
-hypothesis that β_1=0 is actually true), then the probability of getting
-a β_1 coefficient estimate of -0.01916 is less than 0.0001. Similarly,
-the p-value of less than 0.0001 for PCTSINGLES indicates that if there
-is no actual relationship between PCTSINGLES and the dependent variable,
-MEDHVAL, (if the null hypothesis that β_2=0 is actually true), then the
-probability of getting a β_2 coefficient estimate of 0.00298 is less
-than 0.0001. Additionally, the p-value of less than 0.0001 for
+hypothesis that <span class="math inline">\(\beta_1\)</span>=0 is
+actually true), then the probability of getting a <span class="math inline">\(\beta_1\)</span> coefficient estimate of -0.01916
+is less than 0.0001. Similarly, the p-value of less than 0.0001 for
+PCTSINGLES indicates that if there is no actual relationship between
+PCTSINGLES and the dependent variable, MEDHVAL, (if the null hypothesis
+that <span class="math inline">\(\beta_2\)</span>=0 is actually true),
+then the probability of getting a <span class="math inline">\(\beta_2\)</span> coefficient estimate of 0.00298
+is less than 0.0001. Additionally, the p-value of less than 0.0001 for
 PCTBACHMOR indicates that if there is actually no relationship between
 PCTBACHMOR and the dependent variable, MEDHVAL, (i.e., if the null
-hypothesis that β_3=0 is actually true), then the probability of getting
-a β_3 coefficient estimate of 0.02091 is less than 0.0001. Finally, the
-p-value of less than 0.0001 for LMNBELPOV100 indicates that if there is
-no actual relationship between LMNBELPOV100 and MEDHVAL (if the null
-hypothesis that β_4=0 is actually true), then the probability of getting
-a β_4 coefficient estimate of -0.07891 is less than 0.0001.</p>
-<p>These low probabilities indicate that we can safely reject H0:1=0 for
-Ha:10, H0:2=0 for Ha:20, H0:3=0 for Ha:30,H0:4=0 for Ha:40, (at most
-reasonable levels of α = P(Type I error)).</p>
+hypothesis that <span class="math inline">\(\beta_3\)</span>=0 is
+actually true), then the probability of getting a <span class="math inline">\(\beta_3\)</span> coefficient estimate of 0.02091
+is less than 0.0001. Finally, the p-value of less than 0.0001 for
+LMNBELPOV100 indicates that if there is no actual relationship between
+LMNBELPOV100 and MEDHVAL (if the null hypothesis that <span class="math inline">\(\beta_4\)</span>=0 is actually true), then the
+probability of getting a <span class="math inline">\(\beta_4\)</span>
+coefficient estimate of -0.07891 is less than 0.0001.</p>
+<p>These low probabilities indicate that we can safely reject <span class="math inline">\(H_0:\beta_1=0\)</span> for <span class="math inline">\(H_a:\beta_1\neq0\)</span>, <span class="math inline">\(H_0:\beta_2=0\)</span> for <span class="math inline">\(H_a:\beta_2\neq0\)</span>, <span class="math inline">\(H_0:\beta_3=0\)</span> for <span class="math inline">\(H_a:\beta_3\neq0\)</span>,<span class="math inline">\(H_0:\beta_4=0\)</span> for <span class="math inline">\(H_a:\beta_4\neq0\)</span>, (at most reasonable
+levels of <span class="math inline">\(\alpha=P\)</span>(Type I
+error)).</p>
 <p>More than 60% of the variance in the dependent variable is explained
 by the model (R2 and Adjusted R2 are 0.6623 and 0.6615, respectively).
 The low p-value (p&lt;0.0001) associated with the F-ratio indicates that
@@ -2154,7 +2156,9 @@ violated. By using standardized residuals, the residuals of the
 different observations can be compared to each observation. Standard
 Residuals are the raw residuals divided by the standard error of
 estimate. It can be calculated through the following formula.</p>
-<p><img src="data:image/png;base64,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" /></p>
+<p><span class="math display">\[
+e_i^*\approx\frac{\varepsilon_i}{S}\approx\frac{\varepsilon_i}{\sqrt\frac{SSE}{n-2}}
+\]</span></p>
 <p>Figure 9 shows the relationship between standardized residual (on
 y-axis) and the predicted value (on x-axis). The variance of residuals
 seems not constant for different values of predictors (or y-hat).
