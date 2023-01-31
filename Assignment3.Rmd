@@ -6,7 +6,7 @@ author:
     affiliation: "Student"
   - name: "Eugene Brusilovskiy"
     affiliation: "Professor"
-date: "2022-12-16"
+date: "2022-12-21"
 output: 
   html_document:
     toc: true
@@ -38,6 +38,19 @@ local({
     hook_output(x, options)
   })
 })
+```
+
+```{r setup, include=FALSE}
+library(aod)
+library(ggplot2)
+library(rms)
+library(tidyverse)
+library(DAAG)
+library(MASS)
+library(stargazer)
+library(gmodels)
+library(ggcorrplot)
+library(ROCR)
 ```
 
 ## Introduction
@@ -78,11 +91,12 @@ ${ln(\frac{p}{1-p})}$=$\beta_0$+$\beta_1*\scriptsize{FALATAL\_OR\_M}$+$\beta_2*\
 
 The logistic form:
 
-$p$ = $P(\tiny{DRINKING\_D=1})$ =$\frac{e^{\beta_0+\beta_1*\tiny{FALATAL\_OR\_M}+\beta_2*\tiny{OVERTURNED}+\beta_3*\tiny{CELLPHONE}+\beta_4*\tiny{SPEEDING}+\beta_5*\tiny{AGGRESSIVE}+\beta_6*\tiny{DRIVER1617}+\beta_7*\tiny{DRIVER65PLUS}+\beta_8*\tiny{PCTBACHMOR}+\beta_9*\tiny{MEDHHINC}+\varepsilon}}{1+e^{\beta_0+\beta_1*\tiny{FALATAL\_OR\_M}+\beta_2*\tiny{OVERTURNED}+\beta_3*\tiny{CELLPHONE}+\beta_4*\tiny{SPEEDING}+\beta_5*\tiny{AGGRESSIVE}+\beta_6*\tiny{DRIVER1617}+\beta_7*\tiny{DRIVER65PLUS}+\beta_8*\tiny{PCTBACHMOR}+\beta_9*\tiny{MEDHHINC}+\varepsilon}}$
+$p$ = $P(\tiny{DRINKING\_D=1})$ =
+$\frac{e^{\beta_0+\beta_1*{FALATAL\_OR\_M}+\beta_2*{OVERTURNED}+\beta_3*{CELLPHONE}+\beta_4*{SPEEDING}+\beta_5*{AGGRESSIVE}+\beta_6*{DRIVER1617}+\beta_7*{DRIVER65PLUS}+\beta_8*{PCTBACHMOR}+\beta_9*{MEDHHINC}+\varepsilon}}{1+e^{\beta_0+\beta_1*{FALATAL\_OR\_M}+\beta_2*{OVERTURNED}+\beta_3*{CELLPHONE}+\beta_4*{SPEEDING}+\beta_5*{AGGRESSIVE}+\beta_6*{DRIVER1617}+\beta_7*{DRIVER65PLUS}+\beta_8*{PCTBACHMOR}+\beta_9*{MEDHHINC}+\varepsilon}}$
 
 Here, $\beta_0$ is the constant, and $\beta_n$ ($n$ = 1,2, … ) is the coefficient of each predictor. $p$ = $P(DRINKING\_D=1)$ is the probability of drunk driving, and $ln(\frac{p}{1-p})$ is the log odds which has been interpreted above as the natural log of the ratio of drunk driving and not drunk driving. When $ln(\frac{p}{1-p})$ gets really big, the probability of drunk driving approaches 1. While $ln(\frac{p}{1-p})$ gets really small, the probability of drunk driving approaches 0
 
-## **Logistic Regression Hypothesis Testing**
+### **Logistic Regression Hypothesis Testing**
 For each predictor a hypothesis test is completed to determine if its coefficient i is 0:
 
 $$
@@ -101,7 +115,7 @@ $$z=\frac{\hat\beta_i}{\sigma_{\hat\beta_i}}$$
 
 In order to reject the null hypothesis that the predictors have a non-zero coefficient, the z-value must be significant. Instead of comparing estimated coefficients, many statisticians prefer to examine odds ratios. Odds ratios are another way to measure the strength of the relationship between a predictor and the response variable. Instead of comparing the estimated coefficients directly, odds ratios are determined by exponentiating the coefficients. This can be helpful because odds ratios are often easier to interpret than coefficients, especially for non-technical audiences.
 
-## **Logistic Regression Assessment**
+### **Logistic Regression Assessment**
 
 OLS regression is assessed using $R^2$ values, which indicates what percent of variation is explained by the model. This value can be calculated for logistic regression; In logistic regression, R-squared is a measure of goodness of fit that indicates the proportion of variance in the dependent variable that is predictable from the independent variables. However, it is not a very useful metric for evaluating the fit of the model. This is because the logistic function is not linear. In addition, the interpretation of R-squared in logistic regression is not straightforward, making it a less reliable metric for evaluating the fit of the model.
 
@@ -132,7 +146,7 @@ If the AUC is 0.5, it means that the model's performance is no better than a ran
 
 In this investigation, the optimal cut-off will be selected by reducing the misclassification rates and examining the ROC curve with the smallest distance between the upper left corner and the curve, or the greatest AUC.
 
-## **Assumptions of Logistic Regression**
+### **Assumptions of Logistic Regression**
 
 Logistic regression is a type of statistical model that is used to predict a binary outcome (such as success or failure, yes or no, etc.). Like ordinary least squares (OLS) regression, logistic regression relies on the assumption of independence of observations and the absence of multicollinearity between the predictors. However, there are several key differences between logistic regression and OLS regression:
 
@@ -144,7 +158,7 @@ Logistic regression is a type of statistical model that is used to predict a bin
 
 It is important to consider these differences when deciding which type of regression model to use for a particular analysis.
 
-## **Exploratory analyses before logistic regression**
+### **Exploratory analyses before logistic regression**
 
 Before running a logistic regression analysis, we will conduct an exploratory analysis of the data to examine the associations between the dependent variable (DRINKING_D) and several binary predictor variables (FATAL_OR_M, OVERTURNED, CELL_PHONE, SPEEDING, AGGRESSIVE, DRIVER1617, and DRIVER65PLUS). To do this, we will create cross-tabulations that show the number and percentage of 1 responses (i.e., death or major injury) for each predictor variable by category of the DRINKING_D variable. We will also record the total number of 1 responses in the data set. To see the proportions and numbers for each predictor when the driver is not drunk, when the driver is drunk, and in total, we will use R to repeat this process. This will provide insights into the relationships between the variables and inform our decision to run a logistic regression model.
 
@@ -159,9 +173,46 @@ As part of our exploratory analysis, we will use independent samples t-tests to 
 For the variable PCTBACHMOR, the null hypothesis is that the average values are the same for crashes involving drunk drivers and those not involving drunk drivers, while the alternative hypothesis is that the average values are different for the two groups. Similarly, for the variable MEDHHINC, the null hypothesis is that the average values are the same for the two groups, while the alternative hypothesis is that the average values are different. We will use R to conduct these tests and evaluate the t-statistic and p-value to determine whether we can reject the null hypothesis in favor of the alternative. If the t-statistic is high and the p-value is lower than 0.05, this suggests that there is a significant difference between the group means.
 
 ## Result
+
+```{r,results='hide'}
+df <- read.csv("Data/Logistic Regression Data.csv")
+head(df)
+summary(df)
+summary(factor(df$COLLISION_))
+summary(factor(df$FATAL_OR_M))
+summary(factor(df$OVERTURNED))
+summary(factor(df$CELL_PHONE))
+summary(factor(df$SPEEDING))
+summary(factor(df$AGGRESSIVE))
+summary(factor(df$DRIVER1617))
+summary(factor(df$DRIVER65PLUS))
+```
+```{r, results='hide'}
+COLLISION.tab <- table(df$COLLISION_)
+prop.table(COLLISION.tab)
+FATAL_OR_M.tab <- table(df$FATAL_OR_M)
+prop.table(FATAL_OR_M.tab)
+OVERTURNED.tab <- table(df$OVERTURNED)
+prop.table(OVERTURNED.tab)
+CELL_PHONE.tab <- table(df$CELL_PHONE)
+prop.table(CELL_PHONE.tab)
+SPEEDING.tab <- table(df$SPEEDING)
+prop.table(SPEEDING.tab)
+AGGRESSIVE.tab <- table(df$AGGRESSIVE)
+prop.table(AGGRESSIVE.tab)
+DRIVER1617.tab <- table(df$DRIVER1617)
+prop.table(DRIVER1617.tab)
+DRIVER65PLUS.tab <- table(df$DRIVER65PLUS)
+prop.table(DRIVER65PLUS.tab)
+```
 ### **Results of the exploratory analyses**
 According to the data presented in Table 1, out of all car crashes in the dataset, those involving drunk driving accounted for 5.73% (2485 crashes). This is a relatively small proportion compared to the 94.27% of car crashes that were not associated with alcohol.
 
+```{r,results='hide'}
+summary(factor(df$DRINKING_D))
+DRINKING_D.tab <- table(df$DRINKING_D)
+prop.table(DRINKING_D.tab)
+```
 *Table 1 _ Tabulation of DRINKING_D*
 ![](Pic3/T1.png)
 
@@ -169,12 +220,44 @@ The cross-tabulation table in the data shows that out of the total number of acc
 
 The results of the Chi-Square test for the predictors (excluding CELL_PHONE) show that the p-values are very small (p < 0.05), indicating a significant association between drunk driving and these predictors. Therefore, we can reject the null hypothesis $(H_0)$ in favor of the alternative and conclude that there is an association between drunk driving and these predictors. However, the p-value for CELL_PHONE is 0.69, indicating a weaker association between drunk driving and drivers using cell phones. As a result, we fail to reject the null hypothesis for this predictor.
 
+
+
+```{r, results='hide'}
+#"FATAL_OR_M", "OVERTURNED", "CELL_PHONE", "SPEEDING", "AGGRESSIVE", "DRIVER1617", "DRIVER65PLUS"
+CrossTable(df$FATAL_OR_M,df$DRINKING_D, 
+           prop.r=FALSE, prop.t=FALSE,prop.chisq=FALSE,chisq=TRUE)
+CrossTable(df$OVERTURNED,df$DRINKING_D, 
+           prop.r=FALSE, prop.t=FALSE,prop.chisq=FALSE,chisq=TRUE)
+CrossTable(df$CELL_PHONE,df$DRINKING_D, 
+           prop.r=FALSE, prop.t=FALSE,prop.chisq=FALSE,chisq=TRUE)
+CrossTable(df$SPEEDING,df$DRINKING_D, 
+           prop.r=FALSE, prop.t=FALSE,prop.chisq=FALSE,chisq=TRUE)
+CrossTable(df$AGGRESSIVE,df$DRINKING_D, 
+           prop.r=FALSE, prop.t=FALSE,prop.chisq=FALSE,chisq=TRUE)
+CrossTable(df$DRIVER1617,df$DRINKING_D, 
+           prop.r=FALSE, prop.t=FALSE,prop.chisq=FALSE,chisq=TRUE)
+CrossTable(df$DRIVER65PLUS,df$DRINKING_D, 
+           prop.r=FALSE, prop.t=FALSE,prop.chisq=FALSE,chisq=TRUE)
+
+```
+
+
+
 *Table 2 _ Cross-tabulation table with binary predictors*
 ![](Pic3/T2.png)
 
 After examining the association between the dependent variable (DRINKING_D) and the two continuous predictors (PCTBACHMOR and MEDHHINC) using a t-test, we found that the mean value of the percentage of drunk drivers with at least a bachelor's degree was 16.61%, with a p-value of 0.914. The mean value of the median household income for drinking drivers was $31998, with a p-value of 0.16. None of these p-values were less than 0.05, indicating that we cannot reject the null hypothesis that the average values of PCTBACHMOR and MEDHHINC are the same for crashes involving drunk drivers and those that do not. This suggests that there is not a significant association between these continuous predictors and the dependent variable.
 
 *Table 3 _ Cross-tabulation table with continuous predictors*
+```{r, results='hide', collapse = TRUE}
+tapply(df$PCTBACHMOR,df$DRINKING_D, mean)
+tapply(df$PCTBACHMOR, df$DRINKING_D, sd)
+tapply(df$MEDHHINC, df$DRINKING_D, mean) 
+tapply(df$MEDHHINC, df$DRINKING_D, sd)
+
+t.test(df$PCTBACHMOR~df$DRINKING_D)
+t.test(df$MEDHHINC~df$DRINKING_D)
+```
 
 ![](Pic3/T3.png)
 ## **Comments on logistic regression assumptions**
@@ -183,15 +266,45 @@ The first assumption of logistic regression is that the dependent variable must 
 
 *Table 4_ Correlation matrix of variables*
 
-![](Pic3/T4.png)
+```{r}
 
-## **Logistic regression results**
+#"DRINKING_D", "FATAL_OR_M", "OVERTURNED", "CELL_PHONE", "SPEEDING", "AGGRESSIVE", "DRIVER1617", "DRIVER65PLUS"
+ddf <- df %>%
+	dplyr::select(FATAL_OR_M, OVERTURNED, CELL_PHONE, SPEEDING, AGGRESSIVE, DRIVER1617, DRIVER65PLUS, PCTBACHMOR, MEDHHINC)
+
+ggcorrplot(cor(ddf),outline.color = "white",lab =T) +
+  scale_color_manual(name = "Correlation", values = c("red", "blue"))
+```
+
+### **Logistic regression results**
 *Figure 2_Results of logistic regression*
-![](Pic3/F2.png)
+
+```{r,300pt}
+#Logistic Regression
+mylogit <- glm(DRINKING_D ~ FATAL_OR_M + OVERTURNED + CELL_PHONE + SPEEDING + AGGRESSIVE + DRIVER1617 + DRIVER65PLUS + PCTBACHMOR + MEDHHINC, data=df, family = "binomial")
+mylogit1 <- glm(DRINKING_D ~ FATAL_OR_M + OVERTURNED + CELL_PHONE + SPEEDING + AGGRESSIVE + DRIVER1617 + DRIVER65PLUS, data=df, family = "binomial")
+```
+```{r class.source = 'fold-show', max.height='800px'}
+summary(mylogit)
+```
 
 Figure 2 displays the results of the logistic regression. The intercept and six predictors including FATAL_OR_M, OVERTURNED, SPEEDING, AGGRESSIVE, DRIVER1617, DRIVER65PLUS, and MEDHHINC with very low p values are statistically significant, while the other two predictors including CELL_PHONE, and PCTBACHMOR are not statistically significant.
 
 *Table 5_Odds ratios for predictors*
+
+```{r, results='hide', warning=FALSE, collapse = TRUE}
+exp(cbind(OR = coef(mylogit), confint(mylogit)))
+
+logitoutput <- summary(mylogit)
+logitcoeffs <-mylogit$coefficients
+logitcoeffs
+
+OR_ci <- exp(cbind(OR = coef(mylogit),confint(mylogit)))
+
+finallogitoutput<-cbind(logitcoeffs,OR_ci)
+class(finallogitoutput)
+```
+
 ![](Pic3/T5.png)
 
 According to the logistic regression results, holding all other predictors constant:
@@ -205,27 +318,132 @@ According to the logistic regression results, holding all other predictors const
 - A 1 unit increase in median household income (MEDHHINC) is associated with a very slight increase in the odds of a crash involving a drunk driver, compared to a crash not involving a drunk driver.
 
 *Table 6_Specificity, sensitivity, and misclassification rates for different cut-offs*
+
+```{r,results='hide'}
+#Histogram of fitted values (predicted probabilities of y = 1)
+fit <-mylogit$fitted.values
+
+#0.02, 0.03, 0.05, 0.07, 0.08, 0.09, 0.10, 0.15, 0.20, 0.50
+cutoff_values <- c(0.02, 0.03, 0.05, 0.07, 0.08, 0.09, 0.10, 0.15, 0.20, 0.50)
+a <- cbind(df$DRINKING_D, fit)
+b <- a[order(a[,2]),]
+results <- data.frame(cutoff = numeric(),
+                     sensitivity = numeric(),
+                     specificity = numeric(),
+                     misclassification_rate = numeric())
+for (cutoff in cutoff_values) {
+  c <- (b[,2] >= cutoff)
+  d <- cbind(b,c)
+  colnames(d) <- c("Observed.DRINKING_D","Probability.DRINKING_D","Prob.Above.Cutoff")
+  e <- as.data.frame(d)
+  cross_table <- CrossTable(e$Prob.Above.Cutoff, e$Observed.DRINKING_D, prop.r=FALSE,prop.chisq=FALSE, chisq=FALSE,prop.t=FALSE)
+  sensitivity <- cross_table$t[4]/(cross_table$t[3]+cross_table$t[4])
+  specificity <- cross_table$t[1]/(cross_table$t[1]+cross_table$t[2])
+  misclassification_rate <- (cross_table$t[3]+cross_table$t[2])/(cross_table$t[1]+cross_table$t[2]+cross_table$t[3]+cross_table$t[4])
+  results <- rbind(results, data.frame(cutoff, sensitivity, specificity, misclassification_rate))
+}
+```
 ![](Pic3/T6.png)
 
 It appears that among the ten cut-off values that were used to calculate the misclassification rate, the cut-off value of 0.5 resulted in the smallest misclassification rate of 0.057. However, the sensitivity at this cut-off value was only 0.002. The ROC curve shows that the optimal cut-off rate, as determined by minimizing the distance from the upper left corner of the graph, is 0.0637.
 
+```{r results='hide'}
+#ROC Curve
+#For more info, see: https://hopstat.wordpress.com/2014/12/19/a-small-introduction-to-the-rocr-package/
+
+#Here, predictions are estimated probabilities (i.e., p or y-hat values)
+#Also, labels are actual y-values
+
+a <- cbind(df$DRINKING_D, fit)
+#From above, we see that matrix a has 2 columns: 
+#1. The first one is mydata$DRINKING_D, which are actual 
+#values of y (i.e., labels)
+#2. The second one is fit, which are predicted, or fitted values
+#of y (i.e., predictions)
+
+#Let's make the names of the variables easy to understand
+colnames(a) <- c("labels","predictions")
+head(a)
+roc <- as.data.frame(a)
+
+pred <- prediction(roc$predictions, roc$labels)
+#Below, tpr = true positive rate, another term for sensitivity
+#fpr = false positive rate, or 1-specificity
+roc.perf = performance(pred, measure = "tpr", x.measure="fpr")
+```
+
 *Table 7_Specificity, sensitivity, and misclassification rates for optimal cut-off rate*
-![](Pic3/T7.png)
+```{r, results='hold'}
+#Optimal cut-point, if you want to weigh specificity and
+#sensitivity equally.
+#There are a couple ways to identify the optimal cut point.
+#One is the so-called Youden Index, which identifies the cut-off
+#point for which (sensitivity + specificity) is maximized.
+
+#Another one, calculated using the code below, is the cut-off
+#value for which the ROC curve has the minimum distance from
+#the upper left corner of the graph, where specificity = 1 and
+#sensitivity = 1. (This is just a different way of maximizing 
+#specificity and sensitivity). This is where the 
+#d = (x - 0)^2 + (y-1)^2
+#in the code below comes in.
+
+opt.cut = function(perf, pred){
+  cut.ind = mapply(FUN=function(x, y, p){
+    d = (x - 0)^2 + (y-1)^2
+    ind = which(d == min(d))
+    c(sensitivity = y[[ind]], specificity = 1-x[[ind]], 
+      cutoff = p[[ind]])
+  }, perf@x.values, perf@y.values, pred@cutoffs)
+}
+#This will print the optimal cut-off point and the corresponding
+#specificity and sensitivity 
+print(opt.cut(roc.perf, pred))
+
+#Area under the curve
+#Source: http://gim.unmc.edu/dxtests/roc3.htm
+#The prediction accuracy of the model depends on how well the 
+#model predicts 1 responses as 1's and 0 responses as 0's. 
+#Accuracy is measured by the area under the ROC curve. An area 
+#of 1 represents a perfect test (prediction); an area of .5 
+#represents a worthless test (prediction). A rough guide for
+#interpreting area under ROC Curves:
+# .90-1 = excellent (A)
+# .80-.90 = good    (B)
+# .70-.80 = fair    (C)
+# .60-.70 = poor    (D)
+# .50-.60 = fail    (F)
+
+#These might be somewhat conservative estimates, and there will
+#be statisticians who will say that area > .7 is just fine.
+
+auc.perf = performance(pred, measure ="auc")
+auc.perf@y.values
+```
 
 This is significantly different from the optimal rate of 0.5 obtained from table 6. When the cut-off rate is 0.5, the misclassification rate is minimized, but when the cut-off rate 
 is 0.0637, the sensitivity and specificity are maximized at 0.6608 and 0.5452, respectively.
 
 *Figure 3_The ROC curve*
-![](Pic3/F3.png)
+```{r}
+plot(roc.perf)
+abline(a=0,b=1)
+```
 
 The area under the ROC curve (AUC) is 0.6399, which indicates if you have 2 randomly selected observations, such that the first has a drunk driver and the second doesn't, then 64% of the time, the y-hat for the 1st will be higher than the y-hat for the 2nd observation. This is considered to be poor performance for a classifier model. This value indicates that the prediction accuracy of the logistic model is poor.
 
 Then, we run a logistic regression with only binary predictors on DRIVING_D. Below are the results of this regression.
 
 *Figure 4_Results of logistic regression on only binary variables*
-![](Pic3/F4.png)
+```{r class.source = 'fold-show', max.height='800px'}
+summary(mylogit1)
+```
 
 Figure 4 displays the results of the logistic regression. One of the predictors, CELL_PHONE, was not statistically significant in the model, as indicated by a p-value of 0.875. This means that the presence or absence of CELL_PHONE did not have a significant effect on the outcome. While the other six binary predictors and the intercept were significant in the model.
+
+```{r, results='hide'}
+AIC(mylogit, mylogit1)
+```
 
 *Table 8_AIC of mylogit and mylogit 1 model*
 ![](Pic3/T8.png)
